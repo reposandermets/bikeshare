@@ -2,7 +2,7 @@ import time
 import pandas as pd
 
 CITY_DATA = {'chicago': 'chicago.csv',
-             'new york city': 'new_york_city.csv',
+             'new york': 'new_york_city.csv',
              'washington': 'washington.csv'}
 
 
@@ -23,7 +23,7 @@ def get_filters():
         user_input = input(
             """Please type the name of the city:
             Chicago
-            New York City
+            New York
             Washington\n""")
         try:
             city = CITY_DATA[user_input.lower()]
@@ -38,7 +38,7 @@ def get_filters():
                      'April': 4,
                      'May': 5,
                      'June': 6,
-                     'All': 0, }
+                     'All': 0 }
     while month == None:
         user_input = input(
             """Please enter number to filter by month:
@@ -77,7 +77,7 @@ def get_filters():
             Saturday
             Sunday
 
-            All - Include all months\n""")
+            All - Include all days\n""")
         try:
             day = day_options[user_input.title()]
         except KeyError:
@@ -109,6 +109,7 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['day'] = df['Start Time'].dt.day_name()
 
+    print(city, month, day)
     if month != 0:
         df = df[df['month'] == month]
 
